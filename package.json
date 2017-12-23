@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/yueming-Chen/old2d/issues"
   },
-  "homepage": "https://github.com/yueming-Chen/old2d#readme"
+  "homepage": "https://github.com/yueming-Chen/old2d#readme",
+  "dependencies": {
+    "browser-sync": "^2.21.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
 }

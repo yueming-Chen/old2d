@@ -1,4 +1,18 @@
+
+class Component {
+  // height = 5;
+  // width: number;
+  // positionX;
+  // positionY;
+  // handlerKey: Function;
+  // handlrClick: Function;
+  constructor(height, width, posX, posY) {
+    this.height = height;
+  }
+}
+
 window.onload = () => {
+  let component = new Component(1, 2, 3, 4);
   var ballRadius = 10;
   var dx = 2;
   var dy = -2;
@@ -6,9 +20,12 @@ window.onload = () => {
   var ctx = canvas.getContext('2d');
   var rightPressed = false;
   var leftPressed = false;
+  let upPressed = false;
+  let downPressed = false;
   var paddleHeight = 10;
   var paddleWidth = 75;
   var paddleX = (canvas.width - paddleWidth) / 2;
+  var paddleY = (canvas.height - paddleHeight);
   var brickRowCount = 3;
   var brickColumnCount = 5;
   var brickWidth = 75;
@@ -67,9 +84,11 @@ window.onload = () => {
     }
     else if (leftPressed && paddleX > 0) {
       paddleX -= 7;
-    }
+    } else if (upPressed && paddleY > 0) paddleY -= 7;
+    else if (downPressed && paddleY < canvas.height - paddleHeight) paddleY += 7;
+
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -105,14 +124,18 @@ window.onload = () => {
     drawPaddle();
     collisionDetection();
   }
-  setInterval(draw, 10);
-
+  // setInterval(draw, 10);
+  draw();
   function keyDownHandler(e) {
-    if (e.keyCode == 39) {
+    console.log(e.keyCode);
+    if (e.keyCode == 38) upPressed = true;
+    else if (e.keyCode == 39) {
       rightPressed = true;
     }
     else if (e.keyCode == 37) {
       leftPressed = true;
+    } else if (e.keyCode == 40) {
+      downPressed = true;
     }
   }
 
@@ -122,7 +145,10 @@ window.onload = () => {
     }
     else if (e.keyCode == 37) {
       leftPressed = false;
-    }
+    } else if (e.keyCode == 38)
+      upPressed = false;
+    else if (e.keyCode == 40)
+      downPressed = false;
   }
   function mouseMoveHandler(e) {
     var relativeX = e.clientX - canvas.offsetLeft;
@@ -151,3 +177,4 @@ class controller {
   }
 
 }
+
