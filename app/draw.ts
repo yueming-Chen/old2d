@@ -1,4 +1,4 @@
-class drawKernal {
+export class drawKernal {
 
   private _drawHZ = setInterval(() => { });
   private _registList: any[] = [];
