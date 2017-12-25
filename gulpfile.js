@@ -10,7 +10,13 @@ gulp.task('browser-sync', function () {
     }
   });
   gulp.watch("app/style/*.scss", ['sass']);
-  gulp.watch("app/*.js").on('change', browserSync.reload);
+  // gulp.watch("app/*.js").on('change', browserSync.reload);
+  gulp.watch("app/*.ts").on('change', () => {
+    let a = gulp.hasTask('ts');
+    console.log(a);
+    browserSync.reload();
+  });
+
 });
 
 gulp.task('sass', function () {
@@ -19,6 +25,14 @@ gulp.task('sass', function () {
     .pipe(gulp.dest("app/css"))
     .pipe(browserSync.stream());
 });
+
+gulp.task('ts', () => {
+  console.log('use ts');
+  return gulp.src('app/*.ts')
+    .pipe(ts())
+    .pipe(gulp.dest('app/js'))
+    .pipe(browserSync.stream());
+})
 
 
 gulp.task('default', ['browser-sync']);
