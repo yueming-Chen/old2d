@@ -1,8 +1,8 @@
 interface component {
     height: number;
     width: number;
-    positionX;
-    positionY;
+    positionX: any;
+    positionY: any;
     handlerKey: Function;
     handlrClick: Function;
 }

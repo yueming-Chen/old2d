@@ -1,0 +1,10 @@
+{
+  "files": [
+    "app/draw.ts",
+    "app/component.ts"
+  ],
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "target": "es5"
+  }
+}

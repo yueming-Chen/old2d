@@ -1,6 +1,10 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject("tsconfig.json");
+
+
 
 gulp.task('browser-sync', function () {
   browserSync.init({
@@ -28,10 +32,9 @@ gulp.task('sass', function () {
 
 gulp.task('ts', () => {
   console.log('use ts');
-  return gulp.src('app/*.ts')
-    .pipe(ts())
-    .pipe(gulp.dest('app/js'))
-    .pipe(browserSync.stream());
+  return tsProject.src()
+  .pipe(tsProject())
+  .js.pipe(gulp.dest("dist"));
 })
 
 

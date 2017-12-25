@@ -1,7 +1,7 @@
 class drawKernal {
 
   private _drawHZ = setInterval(() => { });
-  private _registList = [];
+  private _registList: any[] = [];
   private refreshms = 10;
 
   constructor() { }
