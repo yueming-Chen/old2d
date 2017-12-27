@@ -1,3 +1,35 @@
+'use restrict';
+class drawKernal {
+  constructor(target, callback, dx, dy) {
+    this.canvas = document.getElementById(target || 'tutorial');
+    this.ctx = canvas.getContext('2d');
+    this.dx = dx;
+    this.dy = dy;
+    this.callback = callback;
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, 10, 0, Math.PI * 2);
+    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fill();
+    this.ctx.closePath();
+
+    x += dx;
+    y += dy;
+
+  }
+
+  start() {
+    this.draw = setInterval(this.callback(), 20);
+  }
+
+  stop() {
+    clearInterval(this.draw);
+  }
+}
+
 
 class Component {
   // height = 5;
@@ -8,16 +40,44 @@ class Component {
   // handlrClick: Function;
   constructor(height, width, posX, posY) {
     this.height = height;
+    this.width = width;
+    this.posX = posX;
+    this.posY = posY;
+    this.keyCode = null;
+    this.init();
+  }
+
+  init() {
+
+  }
+
+  move() {
+    document.addEventListener("keydown", this.keyDownHandler, false);
+    document.addEventListener("keyup", this.keyUpHandler, false);
+  }
+
+  keyDownHandler(e) {
+    this.keyCode = (e.keyCode);
+
+  }
+
+  keyUpHandler(e) {
+    this.keyCode = null;
+
   }
 }
 
 window.onload = () => {
-  let component = new Component(1, 2, 3, 4);
+  // let component = new Component(1, 2, 3, 4);
+  // let _draw = new drawKernal('tutorial',cb,2,2);
+
+
   var ballRadius = 10;
   var dx = 2;
   var dy = -2;
   var canvas = document.getElementById('tutorial');
   var ctx = canvas.getContext('2d');
+
   var rightPressed = false;
   var leftPressed = false;
   let upPressed = false;
@@ -28,6 +88,7 @@ window.onload = () => {
   var paddleY = (canvas.height - paddleHeight);
   var brickRowCount = 3;
   var brickColumnCount = 5;
+
   var brickWidth = 75;
   var brickHeight = 20;
   var brickPadding = 10;
@@ -76,7 +137,6 @@ window.onload = () => {
     }
   }
 
-
   function drawPaddle() {
 
     if (rightPressed && paddleX < canvas.width - paddleWidth) {
@@ -96,6 +156,7 @@ window.onload = () => {
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     ctx.beginPath();
     ctx.arc(x, y, 10, 0, Math.PI * 2);
     ctx.fillStyle = "#0095DD";
@@ -120,9 +181,9 @@ window.onload = () => {
     }
 
 
-    drawBricks();
-    drawPaddle();
-    collisionDetection();
+    // drawBricks();
+    // drawPaddle();
+    // collisionDetection();
   }
   // setInterval(draw, 10);
   draw();
