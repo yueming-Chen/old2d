@@ -1,17 +1,22 @@
 export class drawKernal {
+  // 重新繪圖頻率
+  // 重新繪圖主程式
+  private _drawHZ: number = 50;
 
-  private _drawHZ = setInterval(() => { });
+  private _drawMain = setInterval(() => { }, this._drawHZ);
+
   private _registList: any[] = [];
   private refreshms = 10;
 
   constructor() { }
 
   run() {
-    this._drawHZ = setInterval(this.register, this.refreshms);
+
+    this._drawMain = setInterval(this.register, this.refreshms);
   }
 
   stop() {
-    clearInterval(this._drawHZ);
+    clearInterval(this._drawMain);
   }
 
   addRegister(cb: Function | Promise<any>) {
